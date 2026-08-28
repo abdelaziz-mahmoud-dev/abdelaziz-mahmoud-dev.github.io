@@ -1,21 +1,20 @@
-
 :root {
   --bg: #0b1117;
   --surface: #111a23;
   --surface-light: #17232e;
 
-  --border: #263541;
-  --text: #e7edf2;
-  --muted: #91a0ad;
+  --border: #263746;
 
-  --accent: #63b7b1;
-  --accent-light: #83ccc6;
-  --accent-dark: #397c78;
+  --text: #e8eef2;
+  --muted: #91a3af;
 
-  --green: #7fbf91;
-  --red: #d9827a;
+  --accent: #5fb3b3;
+  --accent-light: #83d1cf;
+  --accent-dark: #2f7777;
 
-  --radius: 12px;
+  --green: #79b892;
+
+  --radius: 14px;
 }
 
 
@@ -39,7 +38,7 @@ body {
   background:
     radial-gradient(
       circle at 50% -20%,
-      rgba(99, 183, 177, 0.10),
+      rgba(95, 179, 179, 0.10),
       transparent 42%
     ),
     var(--bg);
@@ -66,6 +65,10 @@ a {
 }
 
 
+/* =========================
+   CONTAINER
+========================= */
+
 .container {
   width: min(1100px, calc(100% - 40px));
   margin: auto;
@@ -78,17 +81,16 @@ a {
 
 .background-grid {
   position: fixed;
-
   inset: 0;
 
   background-image:
     linear-gradient(
-      rgba(255, 255, 255, 0.022) 1px,
+      rgba(255, 255, 255, 0.025) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.022) 1px,
+      rgba(255, 255, 255, 0.025) 1px,
       transparent 1px
     );
 
@@ -106,7 +108,6 @@ a {
 
 .navbar {
   position: sticky;
-
   top: 0;
 
   z-index: 100;
@@ -115,7 +116,7 @@ a {
 
   backdrop-filter: blur(16px);
 
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 
@@ -123,9 +124,7 @@ a {
   height: 72px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 }
 
@@ -140,7 +139,7 @@ a {
 
 
 .logo span {
-  color: var(--accent);
+  color: var(--accent-light);
 }
 
 
@@ -179,9 +178,9 @@ a {
 
 
 .nav-github:hover {
-  border-color: var(--accent);
+  border-color: var(--accent-dark);
 
-  background: rgba(99, 183, 177, 0.07);
+  background: rgba(95, 179, 179, 0.08);
 }
 
 
@@ -202,7 +201,6 @@ a {
   min-height: calc(100vh - 72px);
 
   display: flex;
-
   align-items: center;
 
   padding: 100px 0;
@@ -223,9 +221,9 @@ a {
 
   padding: 7px 12px;
 
-  border: 1px solid rgba(127,191,145,0.2);
+  border: 1px solid rgba(121, 184, 146, 0.22);
 
-  background: rgba(127,191,145,0.05);
+  background: rgba(121, 184, 146, 0.05);
 
   border-radius: 999px;
 
@@ -241,14 +239,13 @@ a {
 
 .availability-dot {
   width: 7px;
-
   height: 7px;
 
   border-radius: 50%;
 
   background: var(--green);
 
-  box-shadow: 0 0 10px var(--green);
+  box-shadow: 0 0 10px rgba(121, 184, 146, 0.7);
 }
 
 
@@ -280,7 +277,7 @@ a {
 .hero-role {
   min-height: 32px;
 
-  color: #cbd5dc;
+  color: #c7d4da;
 
   font-family: "JetBrains Mono", monospace;
 
@@ -326,6 +323,10 @@ a {
 }
 
 
+/* =========================
+   BUTTONS
+========================= */
+
 .btn {
   display: inline-flex;
 
@@ -348,7 +349,7 @@ a {
 .btn-primary {
   background: var(--accent);
 
-  color: var(--bg);
+  color: #081012;
 }
 
 
@@ -362,7 +363,7 @@ a {
 .btn-secondary {
   border: 1px solid var(--border);
 
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
 
   color: var(--text);
 }
@@ -371,11 +372,15 @@ a {
 .btn-secondary:hover {
   transform: translateY(-2px);
 
-  border-color: var(--accent);
+  border-color: #405665;
 
   background: var(--surface);
 }
 
+
+/* =========================
+   HERO TECH
+========================= */
 
 .hero-tech {
   margin-top: 70px;
@@ -594,7 +599,7 @@ section {
 .skill-card:hover {
   transform: translateY(-4px);
 
-  border-color: rgba(99,183,177,0.45);
+  border-color: rgba(95, 179, 179, 0.45);
 }
 
 
@@ -634,7 +639,7 @@ section {
 
   border-radius: 7px;
 
-  color: #cbd5dc;
+  color: #c7d4da;
 
   font-size: 0.75rem;
 }
@@ -683,7 +688,7 @@ section {
   background:
     linear-gradient(
       145deg,
-      rgba(99,183,177,0.055),
+      rgba(95, 179, 179, 0.055),
       transparent 45%
     ),
     var(--surface);
@@ -699,15 +704,15 @@ section {
 .project-card:hover {
   transform: translateY(-6px);
 
-  border-color: rgba(99,183,177,0.45);
+  border-color: rgba(95, 179, 179, 0.45);
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.3);
+    0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 
 .project-card.featured {
-  border-color: rgba(99,183,177,0.28);
+  border-color: rgba(95, 179, 179, 0.28);
 }
 
 
@@ -742,7 +747,6 @@ section {
   place-items: center;
 
   width: 34px;
-
   height: 34px;
 
   border: 1px solid var(--border);
@@ -756,15 +760,16 @@ section {
 
 
 .project-links a:hover {
-  color: var(--accent-light);
+  color: var(--text);
 
-  border-color: var(--accent);
+  border-color: var(--accent-dark);
+
+  background: rgba(95, 179, 179, 0.06);
 }
 
 
 .project-icon {
   width: 48px;
-
   height: 48px;
 
   display: grid;
@@ -773,7 +778,9 @@ section {
 
   border-radius: 12px;
 
-  background: rgba(99,183,177,0.09);
+  background: rgba(95, 179, 179, 0.09);
+
+  border: 1px solid rgba(95, 179, 179, 0.12);
 
   margin-bottom: 20px;
 
@@ -817,7 +824,7 @@ section {
 
   border-radius: 6px;
 
-  color: #cbd5dc;
+  color: #c7d4da;
 
   font-family: "JetBrains Mono", monospace;
 
@@ -839,7 +846,7 @@ section {
 
 
 .project-button:hover {
-  color: white;
+  color: var(--text);
 }
 
 
@@ -887,14 +894,14 @@ section {
   top: 4px;
 
   width: 11px;
-
   height: 11px;
 
   background: var(--accent);
 
   border-radius: 50%;
 
-  box-shadow: 0 0 15px rgba(99,183,177,0.45);
+  box-shadow:
+    0 0 15px rgba(95, 179, 179, 0.55);
 }
 
 
@@ -933,7 +940,7 @@ section {
   background:
     radial-gradient(
       circle at center,
-      rgba(99,183,177,0.10),
+      rgba(95, 179, 179, 0.10),
       transparent 65%
     ),
     var(--surface);
@@ -1028,6 +1035,10 @@ footer p:first-child {
 }
 
 
+/* =========================
+   ACCESSIBILITY
+========================= */
+
 @media (prefers-reduced-motion: reduce) {
 
   html {
@@ -1036,15 +1047,12 @@ footer p:first-child {
 
   .reveal {
     opacity: 1;
-
     transform: none;
   }
 
   * {
     animation: none !important;
-
     transition: none !important;
   }
 
 }
-
