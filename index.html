@@ -1,680 +1,779 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdelaziz Mahmoud — Backend & AI Developer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #10161f;
-    --ink-raised: #161d29;
-    --ink-border: #263041;
-    --paper: #ecebe6;
-    --paper-dim: #9aa3b2;
-    --amber: #e8a33d;
-    --amber-dim: #7a5a29;
-    --blue: #6f9bc7;
-    --green: #7fb787;
-    --red: #d97b6c;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <title>Abdelaziz Mahmoud | Backend & AI Developer</title>
 
-  html { scroll-behavior: smooth; }
+  <meta
+    name="description"
+    content="Abdelaziz Mahmoud - Computer Science & AI student focused on Backend Development and AI systems."
+  >
 
-  body {
-    background: var(--ink);
-    color: var(--paper);
-    font-family: 'Space Grotesk', sans-serif;
-    line-height: 1.5;
-    overflow-x: hidden;
-  }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  ::selection { background: var(--amber); color: var(--ink); }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
-  .mono {
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  a { color: inherit; text-decoration: none; }
-
-  .wrap {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 0 28px;
-  }
-
-  /* ---------- background grid texture ---------- */
-  .grid-bg {
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--ink-border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--ink-border) 1px, transparent 1px);
-    background-size: 64px 64px;
-    opacity: 0.18;
-    z-index: 0;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-  }
-
-  /* ---------- nav ---------- */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(16, 22, 31, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--ink-border);
-  }
-  nav .wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-  }
-  .logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--amber);
-  }
-  .logo span { color: var(--paper-dim); }
-  .navlinks {
-    display: flex;
-    gap: 28px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--paper-dim);
-  }
-  .navlinks a { position: relative; padding: 4px 0; transition: color 0.2s; }
-  .navlinks a:hover { color: var(--paper); }
-  .navlinks a::before { content: "./"; color: var(--amber-dim); }
-  @media (max-width: 640px) { .navlinks { display: none; } }
-
-  /* ---------- hero / terminal ---------- */
-  .hero {
-    position: relative;
-    z-index: 1;
-    padding: 100px 0 80px;
-  }
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--green);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 22px;
-  }
-  .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-  .terminal {
-    background: var(--ink-raised);
-    border: 1px solid var(--ink-border);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
-  }
-  .term-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--ink-border);
-  }
-  .term-bar .tdot { width: 10px; height: 10px; border-radius: 50%; }
-  .t1 { background: #e0625a; }
-  .t2 { background: #e6b34f; }
-  .t3 { background: #6ec26a; }
-  .term-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--paper-dim);
-    margin-left: 8px;
-  }
-  .term-body {
-    padding: 28px 26px 34px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.95rem;
-  }
-  .term-line { color: var(--paper-dim); margin-bottom: 6px; }
-  .term-line .prompt { color: var(--amber); }
-  .term-out {
-    margin: 0 0 22px 0;
-    font-family: 'Space Grotesk', sans-serif;
-  }
-  .term-out h1 {
-    font-size: clamp(1.8rem, 4.4vw, 2.7rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--paper);
-    margin-bottom: 10px;
-  }
-  .term-out .role {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1rem;
-    color: var(--blue);
-  }
-  .cursor {
-    display: inline-block;
-    width: 9px;
-    height: 1.1em;
-    background: var(--amber);
-    vertical-align: text-bottom;
-    animation: blink 1s step-start infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  .term-desc {
-    color: var(--paper-dim);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1rem;
-    max-width: 60ch;
-    margin-bottom: 26px;
-  }
-
-  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-    padding: 11px 18px;
-    border-radius: 6px;
-    border: 1px solid var(--ink-border);
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-primary {
-    background: var(--amber);
-    color: var(--ink);
-    border-color: var(--amber);
-    font-weight: 600;
-  }
-  .btn-primary:hover { background: #f0b559; }
-  .btn-ghost { color: var(--paper); }
-  .btn-ghost:hover { border-color: var(--paper-dim); background: rgba(255,255,255,0.03); }
-
-  /* ---------- section shell ---------- */
-  section { position: relative; z-index: 1; padding: 70px 0; }
-  .sec-head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 38px;
-    border-bottom: 1px solid var(--ink-border);
-    padding-bottom: 16px;
-  }
-  .sec-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--amber);
-  }
-  .sec-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-
-  /* ---------- about ---------- */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 40px;
-  }
-  @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
-  .about-text p { color: var(--paper-dim); margin-bottom: 16px; font-size: 1rem; }
-  .about-text strong { color: var(--paper); font-weight: 600; }
-
-  .info-card {
-    background: var(--ink-raised);
-    border: 1px solid var(--ink-border);
-    border-radius: 10px;
-    padding: 22px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-  }
-  .info-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px dashed var(--ink-border); }
-  .info-row:last-child { border-bottom: none; }
-  .info-k { color: var(--paper-dim); }
-  .info-v { color: var(--paper); text-align: right; }
-
-  /* ---------- projects as API response cards ---------- */
-  .proj-list { display: flex; flex-direction: column; gap: 18px; }
-  .proj-card {
-    background: var(--ink-raised);
-    border: 1px solid var(--ink-border);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s;
-  }
-  .proj-card:hover { border-color: var(--amber-dim); transform: translateY(-2px); }
-
-  .proj-req {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--ink-border);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    flex-wrap: wrap;
-  }
-  .method {
-    font-weight: 700;
-    padding: 3px 9px;
-    border-radius: 4px;
-    letter-spacing: 0.03em;
-  }
-  .m-get { background: rgba(111,155,199,0.15); color: var(--blue); }
-  .m-post { background: rgba(127,183,135,0.15); color: var(--green); }
-  .endpoint { color: var(--paper-dim); }
-  .status {
-    margin-left: auto;
-    color: var(--green);
-    font-weight: 600;
-  }
-
-  .proj-body { padding: 20px 20px 22px; }
-  .proj-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
-  .proj-desc { color: var(--paper-dim); font-size: 0.95rem; margin-bottom: 16px; }
-  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-  .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--blue);
-    background: rgba(111,155,199,0.1);
-    border: 1px solid rgba(111,155,199,0.25);
-    padding: 3px 9px;
-    border-radius: 4px;
-  }
-  .proj-link {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--amber);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .proj-link:hover { text-decoration: underline; }
-
-  /* ---------- skills ---------- */
-  .skill-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  @media (max-width: 720px) { .skill-groups { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 480px) { .skill-groups { grid-template-columns: 1fr; } }
-  .skill-group-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--paper-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 12px;
-  }
-  .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--ink-border);
-    background: var(--ink-raised);
-    color: var(--paper);
-  }
-
-  /* ---------- contact / footer ---------- */
-  .contact-panel {
-    background: var(--ink-raised);
-    border: 1px solid var(--ink-border);
-    border-radius: 10px;
-    padding: 40px;
-    text-align: center;
-  }
-  .contact-panel .sec-tag { display: block; margin-bottom: 14px; }
-  .contact-panel h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 14px; }
-  .contact-panel p { color: var(--paper-dim); margin-bottom: 26px; max-width: 50ch; margin-left: auto; margin-right: auto; }
-  .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-  footer {
-    border-top: 1px solid var(--ink-border);
-    padding: 26px 0;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--paper-dim);
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  footer .amber { color: var(--amber-dim); }
-
-  /* ---------- reveal on scroll ---------- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--amber);
-    outline-offset: 2px;
-  }
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="grid-bg"></div>
+  <!-- Background -->
+  <div class="background-grid"></div>
 
-<nav>
-  <div class="wrap">
-    <div class="logo">az<span>@</span>portfolio<span>:~$</span></div>
-    <div class="navlinks">
-      <a href="#about">about</a>
-      <a href="#projects">projects</a>
-      <a href="#skills">skills</a>
-      <a href="#contact">contact</a>
-    </div>
-  </div>
-</nav>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
 
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> AVAILABLE FOR OPPORTUNITIES</div>
+      <a href="#" class="logo">
+        <span>&lt;</span>az<span>/&gt;</span>
+      </a>
 
-    <div class="terminal">
-      <div class="term-bar">
-        <span class="tdot t1"></span>
-        <span class="tdot t2"></span>
-        <span class="tdot t3"></span>
-        <span class="term-title">abdelaziz@portfolio — whoami</span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
       </div>
-      <div class="term-body">
-        <div class="term-line"><span class="prompt">$</span> whoami</div>
-        <div class="term-out">
-          <h1>Abdelaziz Mahmoud</h1>
-          <div class="role" id="typedRole"></div>
-        </div>
-        <p class="term-desc">
-          Computer Science student at Benha University, building backend systems
-          and AI-powered applications — one REST endpoint and one RAG pipeline at a time.
-        </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">→ view_projects()</a>
-          <a href="https://github.com/abdelaziz-mahmoud-dev" target="_blank" class="btn btn-ghost">github.com/abdelaziz-mahmoud-dev</a>
+
+      <a
+        href="https://github.com/abdelaziz-mahmoud-dev"
+        target="_blank"
+        class="nav-github"
+      >
+        GitHub ↗
+      </a>
+
+    </div>
+  </nav>
+
+
+  <!-- Hero -->
+  <header class="hero">
+
+    <div class="container hero-content">
+
+      <div class="availability">
+        <span class="availability-dot"></span>
+        Open to opportunities
+      </div>
+
+      <p class="hero-small">
+        Hello, I'm
+      </p>
+
+      <h1>
+        Abdelaziz<br>
+        <span>Mahmoud.</span>
+      </h1>
+
+      <div class="hero-role">
+        <span id="typing-text"></span>
+        <span class="cursor">|</span>
+      </div>
+
+      <p class="hero-description">
+        Computer Science & Artificial Intelligence student at Benha University,
+        building backend systems and exploring AI-powered applications.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#projects" class="btn btn-primary">
+          View My Work →
+        </a>
+
+        <a
+          href="https://linkedin.com/in/abdelazizmahmoudcs"
+          target="_blank"
+          class="btn btn-secondary"
+        >
+          LinkedIn ↗
+        </a>
+
+      </div>
+
+      <div class="hero-tech">
+        <span>Currently working with</span>
+
+        <div>
+          <span>Node.js</span>
+          <span>Express.js</span>
+          <span>MongoDB</span>
+          <span>Python</span>
+          <span>RAG</span>
         </div>
       </div>
-    </div>
-  </div>
-</header>
 
-<section id="about">
-  <div class="wrap reveal">
-    <div class="sec-head">
-      <span class="sec-tag">01</span>
-      <span class="sec-title">about.md</span>
     </div>
-    <div class="about-grid">
-      <div class="about-text">
+
+  </header>
+
+
+  <!-- About -->
+  <section id="about">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <span>01</span>
+        <h2>About Me</h2>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="about-content reveal">
+
+          <p>
+            I'm a <strong>Computer Science and Artificial Intelligence</strong>
+            student at Benha University with a strong interest in software
+            engineering and backend development.
+          </p>
+
+          <p>
+            I'm currently focusing on building backend applications using
+            <strong>Node.js, Express.js and MongoDB</strong>, while developing
+            my understanding of APIs, authentication, databases and
+            software architecture.
+          </p>
+
+          <p>
+            Alongside backend development, I'm exploring
+            <strong>Artificial Intelligence</strong>, especially
+            Retrieval-Augmented Generation (RAG) systems and applications
+            that connect language models with real-world data.
+          </p>
+
+        </div>
+
+
+        <div class="about-stats reveal">
+
+          <div class="stat">
+            <strong>CS & AI</strong>
+            <span>Student</span>
+          </div>
+
+          <div class="stat">
+            <strong>Backend</strong>
+            <span>Current Focus</span>
+          </div>
+
+          <div class="stat">
+            <strong>AI / RAG</strong>
+            <span>Exploring</span>
+          </div>
+
+          <div class="stat">
+            <strong>Egypt</strong>
+            <span>Based in</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Skills -->
+  <section id="skills">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <span>02</span>
+        <h2>Skills & Technologies</h2>
+      </div>
+
+      <div class="skills-grid">
+
+        <div class="skill-card reveal">
+
+          <div class="skill-icon">01</div>
+
+          <h3>Languages</h3>
+
+          <div class="skill-list">
+            <span>C++</span>
+            <span>Python</span>
+            <span>JavaScript</span>
+            <span>HTML</span>
+            <span>CSS</span>
+          </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+          <div class="skill-icon">02</div>
+
+          <h3>Backend</h3>
+
+          <div class="skill-list">
+            <span>Node.js</span>
+            <span>Express.js</span>
+            <span>REST APIs</span>
+            <span>JWT</span>
+            <span>bcrypt</span>
+          </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+          <div class="skill-icon">03</div>
+
+          <h3>Databases</h3>
+
+          <div class="skill-list">
+            <span>MongoDB</span>
+            <span>Mongoose</span>
+            <span>ChromaDB</span>
+          </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+          <div class="skill-icon">04</div>
+
+          <h3>AI & Data</h3>
+
+          <div class="skill-list">
+            <span>RAG</span>
+            <span>LangChain</span>
+            <span>LLMs</span>
+            <span>FastAPI</span>
+            <span>Machine Learning</span>
+          </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+          <div class="skill-icon">05</div>
+
+          <h3>Tools</h3>
+
+          <div class="skill-list">
+            <span>Git</span>
+            <span>GitHub</span>
+            <span>VS Code</span>
+            <span>Postman</span>
+          </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+          <div class="skill-icon">06</div>
+
+          <h3>Fundamentals</h3>
+
+          <div class="skill-list">
+            <span>OOP</span>
+            <span>Data Structures</span>
+            <span>Algorithms</span>
+            <span>File I/O</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Projects -->
+  <section id="projects">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <span>03</span>
+        <h2>Featured Projects</h2>
+      </div>
+
+      <p class="section-intro reveal">
+        A selection of projects I've built while developing my backend,
+        software engineering and AI skills.
+      </p>
+
+
+      <div class="projects-grid">
+
+
+        <!-- Notes App -->
+
+        <article class="project-card reveal">
+
+          <div class="project-header">
+
+            <span class="project-number">01</span>
+
+            <div class="project-links">
+              <a
+                href="https://github.com/abdelaziz-mahmoud-dev/notes-app"
+                target="_blank"
+                aria-label="Notes App GitHub"
+              >
+                ↗
+              </a>
+            </div>
+
+          </div>
+
+          <div class="project-icon">📝</div>
+
+          <h3>Notes App</h3>
+
+          <p>
+            A full-stack notes application with user authentication,
+            protected routes and complete CRUD operations. Each user
+            can securely manage their own notes.
+          </p>
+
+          <div class="project-tags">
+            <span>Node.js</span>
+            <span>Express.js</span>
+            <span>MongoDB</span>
+            <span>JWT</span>
+            <span>JavaScript</span>
+          </div>
+
+          <a
+            href="https://github.com/abdelaziz-mahmoud-dev/notes-app"
+            target="_blank"
+            class="project-button"
+          >
+            View Repository →
+          </a>
+
+        </article>
+
+
+        <!-- CoreMind -->
+
+        <article class="project-card featured reveal">
+
+          <div class="project-header">
+
+            <span class="project-number">02</span>
+
+            <div class="project-links">
+              <a
+                href="https://github.com/abdelaziz-mahmoud-dev/ai-hackathon"
+                target="_blank"
+                aria-label="CoreMind GitHub"
+              >
+                ↗
+              </a>
+            </div>
+
+          </div>
+
+          <div class="project-icon">🤖</div>
+
+          <h3>CoreMind</h3>
+
+          <p>
+            An AI Clinical Decision Support System built around a
+            Retrieval-Augmented Generation pipeline for retrieving
+            evidence from medical documents and generating grounded
+            responses.
+          </p>
+
+          <div class="project-tags">
+            <span>Python</span>
+            <span>RAG</span>
+            <span>FastAPI</span>
+            <span>ChromaDB</span>
+            <span>LLM</span>
+          </div>
+
+          <a
+            href="https://github.com/abdelaziz-mahmoud-dev/ai-hackathon"
+            target="_blank"
+            class="project-button"
+          >
+            View Repository →
+          </a>
+
+        </article>
+
+
+        <!-- Saraha -->
+
+        <article class="project-card reveal">
+
+          <div class="project-header">
+
+            <span class="project-number">03</span>
+
+            <div class="project-links">
+              <a
+                href="https://github.com/abdelaziz-mahmoud-dev/saraha-api"
+                target="_blank"
+                aria-label="Saraha API GitHub"
+              >
+                ↗
+              </a>
+            </div>
+
+          </div>
+
+          <div class="project-icon">💬</div>
+
+          <h3>Saraha API</h3>
+
+          <p>
+            A RESTful backend API for an anonymous messaging application,
+            handling users and messages through Node.js, Express.js,
+            MongoDB and Mongoose.
+          </p>
+
+          <div class="project-tags">
+            <span>Node.js</span>
+            <span>Express.js</span>
+            <span>MongoDB</span>
+            <span>Mongoose</span>
+            <span>REST API</span>
+          </div>
+
+          <a
+            href="https://github.com/abdelaziz-mahmoud-dev/saraha-api"
+            target="_blank"
+            class="project-button"
+          >
+            View Repository →
+          </a>
+
+        </article>
+
+
+        <!-- Task Manager -->
+
+        <article class="project-card reveal">
+
+          <div class="project-header">
+
+            <span class="project-number">04</span>
+
+            <div class="project-links">
+              <a
+                href="https://github.com/abdelaziz-mahmoud-dev/TaskManagerAPI"
+                target="_blank"
+                aria-label="Task Manager API GitHub"
+              >
+                ↗
+              </a>
+            </div>
+
+          </div>
+
+          <div class="project-icon">✅</div>
+
+          <h3>Task Manager API</h3>
+
+          <p>
+            A RESTful task management API with JWT authentication,
+            password hashing and user-specific access control.
+          </p>
+
+          <div class="project-tags">
+            <span>Node.js</span>
+            <span>Express.js</span>
+            <span>MongoDB</span>
+            <span>JWT</span>
+            <span>bcrypt</span>
+          </div>
+
+          <a
+            href="https://github.com/abdelaziz-mahmoud-dev/TaskManagerAPI"
+            target="_blank"
+            class="project-button"
+          >
+            View Repository →
+          </a>
+
+        </article>
+
+
+        <!-- Library -->
+
+        <article class="project-card reveal">
+
+          <div class="project-header">
+
+            <span class="project-number">05</span>
+
+            <div class="project-links">
+              <a
+                href="https://github.com/abdelaziz-mahmoud-dev/LibraryManagementSystem"
+                target="_blank"
+                aria-label="Library Management System GitHub"
+              >
+                ↗
+              </a>
+            </div>
+
+          </div>
+
+          <div class="project-icon">📚</div>
+
+          <h3>Library Management System</h3>
+
+          <p>
+            A C++ console-based library management system focused on
+            object-oriented programming, book and member management,
+            borrowing logic and file-based persistence.
+          </p>
+
+          <div class="project-tags">
+            <span>C++</span>
+            <span>OOP</span>
+            <span>File I/O</span>
+            <span>CLI</span>
+          </div>
+
+          <a
+            href="https://github.com/abdelaziz-mahmoud-dev/LibraryManagementSystem"
+            target="_blank"
+            class="project-button"
+          >
+            View Repository →
+          </a>
+
+        </article>
+
+
+        <!-- Coming Soon -->
+
+        <article class="project-card coming reveal">
+
+          <div class="project-header">
+            <span class="project-number">06</span>
+          </div>
+
+          <div class="project-icon">🚀</div>
+
+          <h3>More Coming Soon</h3>
+
+          <p>
+            Currently learning, building and experimenting with new
+            backend and AI projects. More projects will be added as
+            I continue growing as a developer.
+          </p>
+
+          <div class="project-tags">
+            <span>Learning</span>
+            <span>Building</span>
+            <span>Improving</span>
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Experience -->
+  <section id="experience">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <span>04</span>
+        <h2>Experience & Learning</h2>
+      </div>
+
+
+      <div class="timeline">
+
+
+        <div class="timeline-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+
+            <span class="timeline-date">2026</span>
+
+            <h3>GCI World — AI & Data Science</h3>
+
+            <p>
+              Selected to participate in GCI World, an AI and data
+              science program associated with the University of Tokyo's
+              Matsuo-Iwasawa Lab.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+
+            <span class="timeline-date">2025 — Present</span>
+
+            <h3>Computer Science & Artificial Intelligence</h3>
+
+            <p>
+              Benha University — studying computer science fundamentals,
+              programming, algorithms, data structures, software engineering
+              and artificial intelligence.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+
+            <span class="timeline-date">2025</span>
+
+            <h3>Backend Development — GDG On Campus</h3>
+
+            <p>
+              Completed a backend development bootcamp covering Node.js,
+              Express.js, MongoDB, APIs, authentication and backend
+              application development.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+
+            <span class="timeline-date">2025</span>
+
+            <h3>Web Designer — NTI Training</h3>
+
+            <p>
+              Completed web development training focused on HTML, CSS,
+              JavaScript, Bootstrap and frontend fundamentals.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Contact -->
+  <section id="contact">
+
+    <div class="container">
+
+      <div class="contact-box reveal">
+
+        <span class="contact-label">
+          05 / CONTACT
+        </span>
+
+        <h2>
+          Let's build something.
+        </h2>
+
         <p>
-          I'm a <strong>Computer Science and Artificial Intelligence</strong> student at
-          Benha University (2025–2029), focused on becoming a strong
-          <strong>full-stack and backend developer</strong>.
+          Interested in backend development, AI systems, internships,
+          collaborations or simply talking about technology?
+          Feel free to reach out.
         </p>
-        <p>
-          My current stack centers on <strong>Node.js, Express, and MongoDB</strong> for
-          backend work, alongside growing experience in <strong>AI systems</strong> —
-          particularly Retrieval-Augmented Generation (RAG) pipelines connecting
-          vector databases to language models.
-        </p>
-        <p>
-          In September 2026 I'll be joining <strong>GCI World</strong>, an AI and data
-          science program run by the University of Tokyo's Matsuo-Iwasawa Lab —
-          one more step toward building real, reliable software.
-        </p>
-      </div>
-      <div class="info-card">
-        <div class="info-row"><span class="info-k">status</span><span class="info-v">learning_in_public</span></div>
-        <div class="info-row"><span class="info-k">university</span><span class="info-v">Benha University</span></div>
-        <div class="info-row"><span class="info-k">program</span><span class="info-v">CS & AI</span></div>
-        <div class="info-row"><span class="info-k">location</span><span class="info-v">Banha, Egypt</span></div>
-        <div class="info-row"><span class="info-k">focus</span><span class="info-v">Backend · AI/RAG</span></div>
-        <div class="info-row"><span class="info-k">program_2026</span><span class="info-v">GCI World, UTokyo</span></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="projects">
-  <div class="wrap reveal">
-    <div class="sec-head">
-      <span class="sec-tag">02</span>
-      <span class="sec-title">projects/</span>
-    </div>
+        <div class="contact-buttons">
 
-    <div class="proj-list">
+          <a
+            href="mailto:abdelazizmahmoud814@gmail.com"
+            class="btn btn-primary"
+          >
+            Email Me
+          </a>
 
-      <div class="proj-card">
-        <div class="proj-req">
-          <span class="method m-post">POST</span>
-          <span class="endpoint">/api/rag/query</span>
-          <span class="status">200 OK</span>
-        </div>
-        <div class="proj-body">
-          <div class="proj-title">CoreMind — AI Clinical Decision Support</div>
-          <p class="proj-desc">
-            A RAG system that retrieves evidence from trusted medical guidelines and
-            generates grounded, cited responses using a vector database and an LLM pipeline.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Python</span>
-            <span class="tag">RAG</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Vector DB</span>
-            <span class="tag">LLM</span>
-          </div>
-          <a href="https://github.com/abdelaziz-mahmoud-dev/ai-hackathon" target="_blank" class="proj-link">→ github.com/ai-hackathon</a>
-        </div>
-      </div>
+          <a
+            href="https://linkedin.com/in/abdelazizmahmoudcs"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            LinkedIn
+          </a>
 
-      <div class="proj-card">
-        <div class="proj-req">
-          <span class="method m-post">POST</span>
-          <span class="endpoint">/api/tasks</span>
-          <span class="status">201 Created</span>
-        </div>
-        <div class="proj-body">
-          <div class="proj-title">Task Manager API</div>
-          <p class="proj-desc">
-            A RESTful task management API with JWT authentication and hashed
-            passwords — users can only ever read or modify their own tasks.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Node.js</span>
-            <span class="tag">Express</span>
-            <span class="tag">MongoDB</span>
-            <span class="tag">JWT</span>
-          </div>
-          <a href="https://github.com/abdelaziz-mahmoud-dev/TaskManagerAPI" target="_blank" class="proj-link">→ github.com/TaskManagerAPI</a>
-        </div>
-      </div>
+          <a
+            href="https://github.com/abdelaziz-mahmoud-dev"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            GitHub
+          </a>
 
-      <div class="proj-card">
-        <div class="proj-req">
-          <span class="method m-get">GET</span>
-          <span class="endpoint">/api/messages/random</span>
-          <span class="status">200 OK</span>
         </div>
-        <div class="proj-body">
-          <div class="proj-title">Saraha API</div>
-          <p class="proj-desc">
-            A backend API for an anonymous messaging application, handling users
-            and messages through a clean, documented REST interface.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Node.js</span>
-            <span class="tag">Express.js</span>
-            <span class="tag">MongoDB</span>
-            <span class="tag">Mongoose</span>
-          </div>
-          <a href="https://github.com/abdelaziz-mahmoud-dev/saraha-api" target="_blank" class="proj-link">→ github.com/saraha-api</a>
-        </div>
-      </div>
 
-      <div class="proj-card">
-        <div class="proj-req">
-          <span class="method m-get">GET</span>
-          <span class="endpoint">/library/books</span>
-          <span class="status">200 OK</span>
-        </div>
-        <div class="proj-body">
-          <div class="proj-title">Library Management System</div>
-          <p class="proj-desc">
-            A console-based library system in C++ — book and member management,
-            borrowing logic, and file-based persistence, built on solid OOP fundamentals.
-          </p>
-          <div class="tag-row">
-            <span class="tag">C++</span>
-            <span class="tag">OOP</span>
-            <span class="tag">File I/O</span>
-          </div>
-          <a href="https://github.com/abdelaziz-mahmoud-dev/LibraryManagementSystem" target="_blank" class="proj-link">→ github.com/LibraryManagementSystem</a>
-        </div>
       </div>
 
     </div>
-  </div>
-</section>
 
-<section id="skills">
-  <div class="wrap reveal">
-    <div class="sec-head">
-      <span class="sec-tag">03</span>
-      <span class="sec-title">stack.json</span>
+  </section>
+
+
+  <!-- Footer -->
+  <footer>
+
+    <div class="container">
+
+      <p>
+        Built with HTML · CSS · JavaScript
+      </p>
+
+      <p>
+        © 2026 Abdelaziz Mahmoud
+      </p>
+
     </div>
-    <div class="skill-groups">
-      <div>
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-chips">
-          <span class="chip">Python</span>
-          <span class="chip">C++</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">HTML</span>
-          <span class="chip">CSS</span>
-        </div>
-      </div>
-      <div>
-        <div class="skill-group-title">Backend</div>
-        <div class="skill-chips">
-          <span class="chip">Node.js</span>
-          <span class="chip">Express.js</span>
-          <span class="chip">MongoDB</span>
-          <span class="chip">REST APIs</span>
-          <span class="chip">JWT</span>
-        </div>
-      </div>
-      <div>
-        <div class="skill-group-title">AI & Data</div>
-        <div class="skill-chips">
-          <span class="chip">RAG</span>
-          <span class="chip">LangChain</span>
-          <span class="chip">ChromaDB</span>
-          <span class="chip">Machine Learning</span>
-        </div>
-      </div>
-      <div>
-        <div class="skill-group-title">Tools</div>
-        <div class="skill-chips">
-          <span class="chip">Git</span>
-          <span class="chip">GitHub</span>
-          <span class="chip">VS Code</span>
-          <span class="chip">Postman</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="contact">
-  <div class="wrap reveal">
-    <div class="contact-panel">
-      <span class="sec-tag mono">04 / contact</span>
-      <h2>Let's build something.</h2>
-      <p>Open to internships, collaborations, and anyone who wants to talk backend
-         architecture or RAG pipelines.</p>
-      <div class="contact-links">
-        <a href="mailto:abdelazizmahmoud814@gmail.com" class="btn btn-primary">✉ Email me</a>
-        <a href="https://linkedin.com/in/abdelazizmahmoudcs" target="_blank" class="btn btn-ghost">LinkedIn</a>
-        <a href="https://github.com/abdelaziz-mahmoud-dev" target="_blank" class="btn btn-ghost">GitHub</a>
-      </div>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<footer>
-  built with <span class="amber">HTML · CSS · JS</span> — no frameworks — © 2026 Abdelaziz Mahmoud
-</footer>
 
-<script>
-  // Typing effect for the role line
-  const roles = [
-    "Aspiring Full-Stack Developer",
-    "Backend Developer — Node.js / Express / MongoDB",
-    "Exploring AI & RAG Systems"
-  ];
-  const el = document.getElementById('typedRole');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduceMotion) {
-    el.textContent = roles[0];
-  } else {
-    let roleIndex = 0, charIndex = 0, deleting = false;
-
-    function tick() {
-      const current = roles[roleIndex];
-      if (!deleting) {
-        charIndex++;
-        el.innerHTML = current.slice(0, charIndex) + '<span class="cursor"></span>';
-        if (charIndex === current.length) {
-          deleting = true;
-          setTimeout(tick, 1600);
-          return;
-        }
-      } else {
-        charIndex--;
-        el.innerHTML = current.slice(0, charIndex) + '<span class="cursor"></span>';
-        if (charIndex === 0) {
-          deleting = false;
-          roleIndex = (roleIndex + 1) % roles.length;
-        }
-      }
-      setTimeout(tick, deleting ? 35 : 55);
-    }
-    tick();
-  }
-
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
-</script>
+  <script src="script.js"></script>
 
 </body>
 </html>
