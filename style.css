@@ -5,18 +5,20 @@
 
   --border: #263746;
 
-  --text: #e8eef2;
-  --muted: #91a3af;
+  /* الأبيض/النص الأساسي */
+  --text: #5fb3b3;
 
-  --accent: #5fb3b3;
-  --accent-light: #83d1cf;
-  --accent-dark: #2f7777;
+  /* الأخضر/اللون البارز */
+  --accent: #e8eef2;
+  --accent-light: #f5f8fa;
+  --accent-dark: #b8c7ce;
+
+  --muted: #91a3af;
 
   --green: #79b892;
 
   --radius: 14px;
 }
-
 
 /* =========================
    RESET
