@@ -703,18 +703,18 @@ section {
 }
 
 
-.project-card:hover {
+.project-card.featured {
+  border-color: rgba(95, 179, 179, 0.28);
+}
+
+.project-card:hover,
+.project-card.featured:hover {
   transform: translateY(-6px);
 
   border-color: rgba(95, 179, 179, 0.45);
 
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-
-.project-card.featured {
-  border-color: rgba(95, 179, 179, 0.28);
 }
 
 
